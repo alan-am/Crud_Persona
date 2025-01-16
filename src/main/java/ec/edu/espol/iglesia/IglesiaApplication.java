@@ -9,6 +9,7 @@ public class IglesiaApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(IglesiaApplication.class, args);
+
 	}
 
 }

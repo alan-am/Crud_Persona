@@ -14,7 +14,7 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-    <title>Document</title>
+    <title>Iglesia</title>
   </head>
   <body>
     <nav
@@ -22,7 +22,7 @@
       data-bs-theme="dark"
     >
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">Clinica Odontologica</a>
+        <a class="navbar-brand" href="index.html">Administracion Iglesia</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -44,17 +44,17 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Gestión de Pacientes
+                Gestión de Personas
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="listar_pacientes.html"
-                    >Listar Paciente</a
+                  <a class="dropdown-item" href="listar_personas.html"
+                    >Listar Personas</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="agregar_pacientes.html"
-                    >Agregar Paciente</a
+                  <a class="dropdown-item" href="agregar_persona.html"
+                    >Agregar Persona</a
                   >
                 </li>
               </ul>
@@ -64,8 +64,8 @@
       </div>
     </nav>
     <div class="container-xl">
-      <h1 class="mt-5">Pacientes</h1>
-      <table class="table table-striped-columns" id="pacienteTable">
+      <h1 class="mt-5">Persona</h1>
+      <table class="table table-striped-columns" id="personaTable">
         <thead>
           <tr>
             <th>Orden</th>
@@ -82,7 +82,7 @@
         <tbody></tbody>
       </table>
     </div>
-    <!-- Modal para editar paciente -->
+    <!-- Modal para editar persona -->
     <div
       class="modal fade"
       id="editModal"
@@ -93,7 +93,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="editModalLabel">Modificar Paciente</h5>
+            <h5 class="modal-title" id="editModalLabel">Modificar Persona</h5>
             <button
               type="button"
               class="btn-close"
@@ -179,6 +179,6 @@
       </div>
     </div>
 
-    <script src="js/listarPacientes.js"></script>
+    <script src="js/listarPersonas.js"></script>
   </body>
 </html>

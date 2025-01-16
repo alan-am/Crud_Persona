@@ -17,8 +17,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "pacientes")
-public class Paciente {
+@Table(name = "personas")
+public class Persona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -41,7 +41,7 @@ public class Paciente {
 
     @Override
     public String toString() {
-        return "Paciente{" +
+        return "Persona{" +
                 "id=" + id +
                 ", apellido='" + apellido + '\'' +
                 ", nombre='" + nombre + '\'' +

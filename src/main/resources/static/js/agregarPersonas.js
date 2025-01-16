@@ -26,7 +26,7 @@ form.addEventListener("submit", function (event) {
     },
   };
 
-  fetch(`paciente/guardar`, {
+  fetch(`persona/guardar`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -36,10 +36,10 @@ form.addEventListener("submit", function (event) {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      alert("Paciente agregado con éxito");
+      alert("Persona agregada con éxito");
       form.reset(); // Resetear el formulario
     })
     .catch((error) => {
-      console.error("Error agregando paciente:", error);
+      console.error("Error agregando persona:", error);
     });
 });

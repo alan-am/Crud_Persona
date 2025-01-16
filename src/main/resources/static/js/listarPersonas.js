@@ -1,15 +1,15 @@
 
 // Obtener la referencia a la tabla y al modal
-const tableBody = document.querySelector("#pacienteTable tbody");
+const tableBody = document.querySelector("#personaTable tbody");
 const editModal = new bootstrap.Modal(document.getElementById("editModal"));
 const editForm = document.getElementById("editForm");
-let currentPacienteId;
+let currentPersonaId;
 let currentDomicilioId;
 
 // Función para obtener y mostrarlos
-function fetchPacientes() {
-  // listar los pacientes
-  fetch(`paciente/buscartodos`)
+function fetchPersonas() {
+  // listar las personas
+  fetch(`persona/buscartodos`)
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
@@ -17,23 +17,23 @@ function fetchPacientes() {
       tableBody.innerHTML = "";
 
       // Insertar los datos en la tabla
-      data.forEach((paciente, index) => {
+      data.forEach((persona, index) => {
         const row = document.createElement("tr");
 
         row.innerHTML = `
-              <td>${paciente.id}</td>
-              <td>${paciente.apellido}</td>
-              <td>${paciente.nombre}</td>
-              <td>${paciente.dni}</td>
-              <td>${paciente.fechaIngreso}</td>
-              <td>${paciente.domicilio.calle}</td>
-              <td>${paciente.domicilio.numero}</td>
-              <td>${paciente.domicilio.localidad}</td>
-              <td>${paciente.domicilio.provincia}</td>
+              <td>${persona.id}</td>
+              <td>${persona.apellido}</td>
+              <td>${persona.nombre}</td>
+              <td>${persona.dni}</td>
+              <td>${persona.fechaIngreso}</td>
+              <td>${persona.domicilio.calle}</td>
+              <td>${persona.domicilio.numero}</td>
+              <td>${persona.domicilio.localidad}</td>
+              <td>${persona.domicilio.provincia}</td>
               <td>
-                <button class="btn btn-primary btn-sm" onclick="editPaciente(${paciente.id}, '${paciente.apellido}','${paciente.nombre}', '${paciente.dni}', 
-                '${paciente.fechaIngreso}', '${paciente.domicilio.id}', '${paciente.domicilio.calle}', '${paciente.domicilio.numero}', '${paciente.domicilio.localidad}', '${paciente.domicilio.provincia}')">Modificar</button>
-                <button class="btn btn-danger btn-sm" onclick="deletePaciente(${paciente.id})">Eliminar</button>
+                <button class="btn btn-primary btn-sm" onclick="editPersona(${persona.id}, '${persona.apellido}','${persona.nombre}', '${persona.dni}',
+                '${persona.fechaIngreso}', '${persona.domicilio.id}', '${persona.domicilio.calle}', '${persona.domicilio.numero}', '${persona.domicilio.localidad}', '${persona.domicilio.provincia}')">Modificar</button>
+                <button class="btn btn-danger btn-sm" onclick="deletePersona(${persona.id})">Eliminar</button>
               </td>
             `;
 
@@ -45,8 +45,8 @@ function fetchPacientes() {
     });
 }
 
-// Función para abrir el modal y cargar los datos del paciente
-editPaciente = function (
+// Función para abrir el modal y cargar los datos de la persona
+editPersona = function (
   id,
   apellido,
   nombre,
@@ -58,7 +58,7 @@ editPaciente = function (
   localidad,
   provincia
 ) {
-  currentPacienteId = id;
+  currentPersonaId = id;
   currentDomicilioId = idDomicilio;
   document.getElementById("editApellido").value = apellido;
   document.getElementById("editNombre").value = nombre;
@@ -71,7 +71,7 @@ editPaciente = function (
   editModal.show();
 };
 
-// Función para editar un paciente
+// Función para editar una persona
 editForm.addEventListener("submit", function (event) {
   event.preventDefault();
   const apellido = document.getElementById("editApellido").value;
@@ -83,14 +83,14 @@ editForm.addEventListener("submit", function (event) {
   const localidad = document.getElementById("editLocalidad").value;
   const provincia = document.getElementById("editProvincia").value;
 
-  //modificar un paciente
-  fetch(`paciente/modificar`, {
+  //modificar una persona
+  fetch(`persona/modificar`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      id: currentPacienteId,
+      id: currentPersonaId,
       nombre,
       apellido,
       dni,
@@ -107,33 +107,33 @@ editForm.addEventListener("submit", function (event) {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      alert("Paciente modificado con éxito");
-      fetchPacientes();
+      alert("Persona modificada con éxito");
+      fetchPersonas();
       editModal.hide();
     })
     .catch((error) => {
-      console.error("Error editando paciente:", error);
+      console.error("Error editando persona:", error);
     });
 });
 
-// Función para eliminar un paciente
-deletePaciente = function (id) {
-  if (confirm("¿Está seguro de que desea eliminar este paciente?")) {
-    // eliminar el paciente
-    fetch(`paciente/eliminar/${id}`, {
+// Función para eliminar una persona
+deletePersona = function (id) {
+  if (confirm("¿Esta seguro de que desea eliminar esta persona?")) {
+    // eliminar la persona
+    fetch(`persona/eliminar/${id}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        alert("Paciente eliminado con éxito");
-        fetchPacientes();
+        alert("Persona eliminada con éxito");
+        fetchPersonas();
       })
       .catch((error) => {
-        console.error("Error borrando paciente:", error);
+        console.error("Error borrando persona:", error);
       });
   }
 };
 
 // Llamar a la función para obtener y mostrarlos
-fetchPacientes();
+fetchPersonas();
