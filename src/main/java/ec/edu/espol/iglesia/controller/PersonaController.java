@@ -26,8 +26,8 @@ public class PersonaController {
     }
 
     @GetMapping("/buscar/{id}")
-    public ResponseEntity<?> buscarPorId(@PathVariable Integer id){
-        Optional <Persona> persona = personaService.buscarPorId(id);
+    public ResponseEntity<?> buscarPorId(@PathVariable String dni){
+        Optional <Persona> persona = personaService.buscarPorId(dni);
         if(persona.isPresent()){
             return ResponseEntity.ok(persona.get());
         } else {
@@ -44,7 +44,7 @@ public class PersonaController {
 
     @PutMapping("/modificar")
     public ResponseEntity<?> modificarPersona(@Valid @RequestBody Persona persona){
-        Optional <Persona> personaEncontrado = personaService.buscarPorId(persona.getId());
+        Optional <Persona> personaEncontrado = personaService.buscarPorId(persona.getDni());
         if(personaEncontrado.isPresent()){
             personaService.modificarPersona(persona);
             String jsonResponse = "{\"mensaje\": \"La persona fue modificada\"}";
@@ -54,9 +54,9 @@ public class PersonaController {
         }
     }
 
-    @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<?> eliminarPersona(@PathVariable Integer id){
-            personaService.eliminarPersona(id);
+    @DeleteMapping("/eliminar/{dni}")
+    public ResponseEntity<?> eliminarPersona(@PathVariable String dni){
+            personaService.eliminarPersona(dni);
             return ResponseEntity.ok("{\"mensaje\": \"La persona fue borrada\"}");
     }
 

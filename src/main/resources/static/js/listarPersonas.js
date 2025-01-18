@@ -3,7 +3,7 @@
 const tableBody = document.querySelector("#personaTable tbody");
 const editModal = new bootstrap.Modal(document.getElementById("editModal"));
 const editForm = document.getElementById("editForm");
-let currentPersonaId;
+let currentDni;
 let currentDomicilioId;
 
 // Función para obtener y mostrarlos
@@ -19,21 +19,20 @@ function fetchPersonas() {
       // Insertar los datos en la tabla
       data.forEach((persona, index) => {
         const row = document.createElement("tr");
-
+        //CAMBIAR
         row.innerHTML = `
-              <td>${persona.id}</td>
+              <td>${persona.dni}</td>
               <td>${persona.apellido}</td>
               <td>${persona.nombre}</td>
-              <td>${persona.dni}</td>
               <td>${persona.fechaIngreso}</td>
               <td>${persona.domicilio.calle}</td>
               <td>${persona.domicilio.numero}</td>
               <td>${persona.domicilio.localidad}</td>
               <td>${persona.domicilio.provincia}</td>
               <td>
-                <button class="btn btn-primary btn-sm" onclick="editPersona(${persona.id}, '${persona.apellido}','${persona.nombre}', '${persona.dni}',
+                <button class="btn btn-primary btn-sm" onclick="editPersona(${persona.dni}, '${persona.apellido}','${persona.nombre}',
                 '${persona.fechaIngreso}', '${persona.domicilio.id}', '${persona.domicilio.calle}', '${persona.domicilio.numero}', '${persona.domicilio.localidad}', '${persona.domicilio.provincia}')">Modificar</button>
-                <button class="btn btn-danger btn-sm" onclick="deletePersona(${persona.id})">Eliminar</button>
+                <button class="btn btn-danger btn-sm" onclick="deletePersona(${persona.dni})">Eliminar</button>
               </td>
             `;
 
@@ -47,10 +46,9 @@ function fetchPersonas() {
 
 // Función para abrir el modal y cargar los datos de la persona
 editPersona = function (
-  id,
+  dni,
   apellido,
   nombre,
-  dni,
   fechaIngreso,
   idDomicilio,
   calle,
@@ -58,7 +56,7 @@ editPersona = function (
   localidad,
   provincia
 ) {
-  currentPersonaId = id;
+  currentDni = dni;
   currentDomicilioId = idDomicilio;
   document.getElementById("editApellido").value = apellido;
   document.getElementById("editNombre").value = nombre;
@@ -76,7 +74,6 @@ editForm.addEventListener("submit", function (event) {
   event.preventDefault();
   const apellido = document.getElementById("editApellido").value;
   const nombre = document.getElementById("editNombre").value;
-  const dni = document.getElementById("editDni").value;
   const fecha = document.getElementById("editFecha").value;
   const calle = document.getElementById("editCalle").value;
   const numero = document.getElementById("editNumero").value;
@@ -90,10 +87,9 @@ editForm.addEventListener("submit", function (event) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      id: currentPersonaId,
+      dni: currentDni,
       nombre,
       apellido,
-      dni,
       fechaIngreso: fecha,
       domicilio: {
         id: currentDomicilioId,
@@ -117,10 +113,10 @@ editForm.addEventListener("submit", function (event) {
 });
 
 // Función para eliminar una persona
-deletePersona = function (id) {
+deletePersona = function (dni) {
   if (confirm("¿Esta seguro de que desea eliminar esta persona?")) {
     // eliminar la persona
-    fetch(`persona/eliminar/${id}`, {
+    fetch(`persona/eliminar/${dni}`, {
       method: "DELETE",
     })
       .then((response) => response.json())

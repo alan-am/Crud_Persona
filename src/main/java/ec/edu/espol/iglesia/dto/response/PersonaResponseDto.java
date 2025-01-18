@@ -10,8 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PersonaResponseDto {
-    private Integer id;
+    private String dni;
     private String nombre;
     private String apellido;
-    private String dni;
 }

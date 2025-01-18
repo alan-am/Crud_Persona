@@ -19,16 +19,16 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "personas")
 public class Persona {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @NotBlank
+    @Size(min=7, max=15)
+    private String dni;
+
     @NotBlank
     private String apellido;
     @NotBlank
     private String nombre;
-    @NotBlank
-    @Size(min=7, max=15)
-    private String dni;
     @NotNull
     private LocalDate fechaIngreso;
 
@@ -42,10 +42,9 @@ public class Persona {
     @Override
     public String toString() {
         return "Persona{" +
-                "id=" + id +
+                "dni=" + dni +
                 ", apellido='" + apellido + '\'' +
                 ", nombre='" + nombre + '\'' +
-                ", dni='" + dni + '\'' +
                 ", fechaIngreso=" + fechaIngreso +
                 ", domicilio=" + domicilio +
                 '}';
