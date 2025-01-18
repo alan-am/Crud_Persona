@@ -25,13 +25,10 @@ function fetchPersonas() {
               <td>${persona.apellido}</td>
               <td>${persona.nombre}</td>
               <td>${persona.fechaIngreso}</td>
-              <td>${persona.domicilio.calle}</td>
-              <td>${persona.domicilio.numero}</td>
               <td>${persona.domicilio.localidad}</td>
-              <td>${persona.domicilio.provincia}</td>
               <td>
                 <button class="btn btn-primary btn-sm" onclick="editPersona(${persona.dni}, '${persona.apellido}','${persona.nombre}',
-                '${persona.fechaIngreso}', '${persona.domicilio.id}', '${persona.domicilio.calle}', '${persona.domicilio.numero}', '${persona.domicilio.localidad}', '${persona.domicilio.provincia}')">Modificar</button>
+                '${persona.fechaIngreso}', '${persona.domicilio.id}', '${persona.domicilio.calle}', '${persona.domicilio.localidad}', '${persona.domicilio.provincia}')">Modificar</button>
                 <button class="btn btn-danger btn-sm" onclick="deletePersona(${persona.dni})">Eliminar</button>
               </td>
             `;
@@ -52,7 +49,6 @@ editPersona = function (
   fechaIngreso,
   idDomicilio,
   calle,
-  numero,
   localidad,
   provincia
 ) {
@@ -63,7 +59,7 @@ editPersona = function (
   document.getElementById("editDni").value = dni;
   document.getElementById("editFecha").value = fechaIngreso;
   document.getElementById("editCalle").value = calle;
-  document.getElementById("editNumero").value = numero;
+  //document.getElementById("editNumero").value = numero;
   document.getElementById("editLocalidad").value = localidad;
   document.getElementById("editProvincia").value = provincia;
   editModal.show();
@@ -76,7 +72,7 @@ editForm.addEventListener("submit", function (event) {
   const nombre = document.getElementById("editNombre").value;
   const fecha = document.getElementById("editFecha").value;
   const calle = document.getElementById("editCalle").value;
-  const numero = document.getElementById("editNumero").value;
+  //const numero = document.getElementById("editNumero").value;
   const localidad = document.getElementById("editLocalidad").value;
   const provincia = document.getElementById("editProvincia").value;
 
@@ -94,7 +90,6 @@ editForm.addEventListener("submit", function (event) {
       domicilio: {
         id: currentDomicilioId,
         calle,
-        numero,
         localidad,
         provincia,
       },

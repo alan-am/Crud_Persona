@@ -19,7 +19,6 @@ public class Domicilio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String calle;
-    private int numero;
     @NotBlank
     private String localidad;
     @NotBlank
@@ -30,7 +29,6 @@ public class Domicilio {
         return "Domicilio{" +
                 "id=" + id +
                 ", calle='" + calle + '\'' +
-                ", numero=" + numero +
                 ", localidad='" + localidad + '\'' +
                 ", provincia='" + provincia + '\'' +
                 '}';

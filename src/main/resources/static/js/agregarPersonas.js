@@ -8,7 +8,7 @@ form.addEventListener("submit", function (event) {
   const dni = document.getElementById("dni").value;
   const fecha = document.getElementById("fecha").value;
   const calle = document.getElementById("calle").value;
-  const numero = document.getElementById("numero").value;
+  //const numero = document.getElementById("numero").value;
   const localidad = document.getElementById("localidad").value;
   const provincia = document.getElementById("provincia").value;
 
@@ -20,7 +20,6 @@ form.addEventListener("submit", function (event) {
     fechaIngreso: fecha,
     domicilio: {
       calle,
-      numero,
       localidad,
       provincia,
     },
