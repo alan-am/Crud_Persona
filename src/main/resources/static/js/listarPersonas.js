@@ -5,6 +5,7 @@ const editModal = new bootstrap.Modal(document.getElementById("editModal"));
 const editForm = document.getElementById("editForm");
 let currentDni;
 let currentDomicilioId;
+let currentTelefonoId;
 
 // Función para obtener y mostrarlos
 function fetchPersonas() {
@@ -26,9 +27,10 @@ function fetchPersonas() {
               <td>${persona.nombre}</td>
               <td>${persona.fechaIngreso}</td>
               <td>${persona.domicilio.localidad}</td>
+              <td>${persona.telefono.telf}</td>
               <td>
                 <button class="btn btn-primary btn-sm" onclick="editPersona(${persona.dni}, '${persona.apellido}','${persona.nombre}',
-                '${persona.fechaIngreso}', '${persona.domicilio.id}', '${persona.domicilio.calle}', '${persona.domicilio.localidad}', '${persona.domicilio.provincia}')">Modificar</button>
+                '${persona.fechaIngreso}', '${persona.domicilio.id}', '${persona.domicilio.calle}', '${persona.domicilio.localidad}', '${persona.domicilio.provincia}','${persona.telefono.id}', '${persona.telefono.telf}')">Modificar</button>
                 <button class="btn btn-danger btn-sm" onclick="deletePersona(${persona.dni})">Eliminar</button>
               </td>
             `;
@@ -50,10 +52,13 @@ editPersona = function (
   idDomicilio,
   calle,
   localidad,
-  provincia
+  provincia,
+  idTelefono,
+  telf,
 ) {
   currentDni = dni;
   currentDomicilioId = idDomicilio;
+  currentTelefonoId = idTelefono
   document.getElementById("editApellido").value = apellido;
   document.getElementById("editNombre").value = nombre;
   document.getElementById("editDni").value = dni;
@@ -62,6 +67,7 @@ editPersona = function (
   //document.getElementById("editNumero").value = numero;
   document.getElementById("editLocalidad").value = localidad;
   document.getElementById("editProvincia").value = provincia;
+  document.getElementById("editTelefono").value = telf;
   editModal.show();
 };
 
@@ -75,6 +81,7 @@ editForm.addEventListener("submit", function (event) {
   //const numero = document.getElementById("editNumero").value;
   const localidad = document.getElementById("editLocalidad").value;
   const provincia = document.getElementById("editProvincia").value;
+  const telf = document.getElementById("editTelefono").value;
 
   //modificar una persona
   fetch(`persona/modificar`, {
@@ -92,6 +99,10 @@ editForm.addEventListener("submit", function (event) {
         calle,
         localidad,
         provincia,
+      },
+      telefono: {
+        id: currentTelefonoId,
+        telf,
       },
     }),
   })

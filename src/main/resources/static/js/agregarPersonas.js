@@ -11,6 +11,7 @@ form.addEventListener("submit", function (event) {
   //const numero = document.getElementById("numero").value;
   const localidad = document.getElementById("localidad").value;
   const provincia = document.getElementById("provincia").value;
+  const telf = document.getElementById("telefono").value;
 
   // llamando al endpoint de agregar
   const datosFormulario = {
@@ -22,6 +23,9 @@ form.addEventListener("submit", function (event) {
       calle,
       localidad,
       provincia,
+    },
+    telefono: {
+       telf,
     },
   };
 

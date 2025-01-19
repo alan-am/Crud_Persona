@@ -37,16 +37,21 @@ public class Persona {
     @JoinColumn(name = "id_domicilio")
     private Domicilio domicilio;
 
+    @Valid
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_telefono")
+    private Telefono telefono;
 
 
     @Override
     public String toString() {
         return "Persona{" +
-                "dni=" + dni +
+                "dni='" + dni + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", fechaIngreso=" + fechaIngreso +
                 ", domicilio=" + domicilio +
+                ", telefono=" + telefono +
                 '}';
     }
 }
