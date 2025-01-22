@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PersonaResponseDto {
-    private String dni;
+    private String cedula;
     private String nombre;
     private String apellido;
 }

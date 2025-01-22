@@ -19,16 +19,16 @@ public class VistaController {
     // localhost:8080/20  -> @PathVariable
     // localhost:8080?id=1  -> @RequestParams
     @GetMapping("/index")
-    public String mostrarPersonaPorId(Model model, @RequestParam String dni){
-        Persona persona = personaService.buscarPorId(dni).get();
+    public String mostrarPersonaPorId(Model model, @RequestParam String cedula){
+        Persona persona = personaService.buscarPorId(cedula).get();
         model.addAttribute("nombre", persona.getNombre());
         model.addAttribute("apellido", persona.getApellido());
         return "persona";
     }
 
     @GetMapping("/index2/{id}")
-    public String mostrarPersonaPorId2(Model model, @PathVariable String dni){
-        Persona persona = personaService.buscarPorId(dni).get();
+    public String mostrarPersonaPorId2(Model model, @PathVariable String cedula){
+        Persona persona = personaService.buscarPorId(cedula).get();
         model.addAttribute("nombre", persona.getNombre());
         model.addAttribute("apellido", persona.getApellido());
         return "persona";

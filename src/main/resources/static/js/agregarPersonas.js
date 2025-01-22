@@ -5,10 +5,10 @@ form.addEventListener("submit", function (event) {
 
   const apellido = document.getElementById("apellido").value;
   const nombre = document.getElementById("nombre").value;
-  const dni = document.getElementById("dni").value;
+  const cedula = document.getElementById("cedula").value;
+  const sexo = document.getElementById("sexo").value;
   const fecha = document.getElementById("fecha").value;
   const calle = document.getElementById("calle").value;
-  //const numero = document.getElementById("numero").value;
   const localidad = document.getElementById("localidad").value;
   const provincia = document.getElementById("provincia").value;
   const telf = document.getElementById("telefono").value;
@@ -17,8 +17,9 @@ form.addEventListener("submit", function (event) {
   const datosFormulario = {
     nombre,
     apellido,
-    dni,
-    fechaIngreso: fecha,
+    cedula,
+    sexo,
+    fechaNacimiento: fecha,
     domicilio: {
       calle,
       localidad,

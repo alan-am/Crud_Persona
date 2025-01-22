@@ -24,8 +24,8 @@ public class PersonaService implements IPersonaService {
     }
 
     @Override ///AQUI
-    public Optional<Persona> buscarPorId(String dni) {
-        return personaRepository.findById(dni);
+    public Optional<Persona> buscarPorId(String cedula) {
+        return personaRepository.findById(cedula);
     }
 
     @Override
@@ -39,12 +39,12 @@ public class PersonaService implements IPersonaService {
     }
 
     @Override
-    public void eliminarPersona(String dni) {
-        Optional<Persona> personaEncontrado = personaRepository.findById(dni);
+    public void eliminarPersona(String cedula) {
+        Optional<Persona> personaEncontrado = personaRepository.findById(cedula);
         if(personaEncontrado.isPresent()){
-            personaRepository.deleteById(dni);
+            personaRepository.deleteById(cedula);
         } else {
-            throw new ResourceNotFoundException("La persona "+ dni +" no fue encontrada");
+            throw new ResourceNotFoundException("La persona "+ cedula +" no fue encontrada");
         }
 
     }

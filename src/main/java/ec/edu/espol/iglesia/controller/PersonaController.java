@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/persona") //OJO
+@RequestMapping("/persona") //endpoint
 public class PersonaController {
     private PersonaService personaService;
 
@@ -26,12 +26,11 @@ public class PersonaController {
     }
 
     @GetMapping("/buscar/{id}")
-    public ResponseEntity<?> buscarPorId(@PathVariable String dni){
-        Optional <Persona> persona = personaService.buscarPorId(dni);
+    public ResponseEntity<?> buscarPorId(@PathVariable String cedula){
+        Optional <Persona> persona = personaService.buscarPorId(cedula);
         if(persona.isPresent()){
             return ResponseEntity.ok(persona.get());
         } else {
-             // ResponseEntity.status(HttpStatus.NOT_FOUND).body("paciente no encontrado");
             //ResponseEntity.notFound().build(); //OJO
             return ResponseEntity.status(HttpStatusCode.valueOf(404)).build();
         }
@@ -44,7 +43,7 @@ public class PersonaController {
 
     @PutMapping("/modificar")
     public ResponseEntity<?> modificarPersona(@Valid @RequestBody Persona persona){
-        Optional <Persona> personaEncontrado = personaService.buscarPorId(persona.getDni());
+        Optional <Persona> personaEncontrado = personaService.buscarPorId(persona.getCedula());
         if(personaEncontrado.isPresent()){
             personaService.modificarPersona(persona);
             String jsonResponse = "{\"mensaje\": \"La persona fue modificada\"}";
@@ -54,9 +53,9 @@ public class PersonaController {
         }
     }
 
-    @DeleteMapping("/eliminar/{dni}")
-    public ResponseEntity<?> eliminarPersona(@PathVariable String dni){
-            personaService.eliminarPersona(dni);
+    @DeleteMapping("/eliminar/{cedula}")
+    public ResponseEntity<?> eliminarPersona(@PathVariable String cedula){
+            personaService.eliminarPersona(cedula);
             return ResponseEntity.ok("{\"mensaje\": \"La persona fue borrada\"}");
     }
 

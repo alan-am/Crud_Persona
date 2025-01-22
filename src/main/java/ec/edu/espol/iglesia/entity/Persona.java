@@ -23,14 +23,16 @@ public class Persona {
     @Id
     @NotBlank
     @Size(min=7, max=15)
-    private String dni;
+    private String cedula;
 
     @NotBlank
     private String apellido;
     @NotBlank
     private String nombre;
     @NotNull
-    private LocalDate fechaIngreso;
+    private LocalDate fechaNacimiento;
+    @NotNull
+    private String sexo;
 
     @Valid
     @OneToOne(cascade = CascadeType.ALL)
@@ -46,10 +48,11 @@ public class Persona {
     @Override
     public String toString() {
         return "Persona{" +
-                "dni='" + dni + '\'' +
+                "cedula='" + cedula + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", nombre='" + nombre + '\'' +
-                ", fechaIngreso=" + fechaIngreso +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", Sexo=" + sexo +
                 ", domicilio=" + domicilio +
                 ", telefono=" + telefono +
                 '}';

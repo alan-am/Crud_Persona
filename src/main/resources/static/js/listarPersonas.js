@@ -3,7 +3,7 @@
 const tableBody = document.querySelector("#personaTable tbody");
 const editModal = new bootstrap.Modal(document.getElementById("editModal"));
 const editForm = document.getElementById("editForm");
-let currentDni;
+let currentCedula;
 let currentDomicilioId;
 let currentTelefonoId;
 
@@ -22,16 +22,17 @@ function fetchPersonas() {
         const row = document.createElement("tr");
         //CAMBIAR
         row.innerHTML = `
-              <td>${persona.dni}</td>
+              <td>${String(persona.cedula)}</td>
               <td>${persona.apellido}</td>
               <td>${persona.nombre}</td>
-              <td>${persona.fechaIngreso}</td>
+              <td>${persona.sexo}</td>
+              <td>${persona.fechaNacimiento}</td>
               <td>${persona.domicilio.localidad}</td>
               <td>${persona.telefono.telf}</td>
               <td>
-                <button class="btn btn-primary btn-sm" onclick="editPersona(${persona.dni}, '${persona.apellido}','${persona.nombre}',
-                '${persona.fechaIngreso}', '${persona.domicilio.id}', '${persona.domicilio.calle}', '${persona.domicilio.localidad}', '${persona.domicilio.provincia}','${persona.telefono.id}', '${persona.telefono.telf}')">Modificar</button>
-                <button class="btn btn-danger btn-sm" onclick="deletePersona(${persona.dni})">Eliminar</button>
+                <button class="btn btn-primary btn-sm" onclick="editPersona(${String(persona.cedula)}, '${persona.apellido}','${persona.nombre}','${persona.sexo}',
+                '${persona.fechaNacimiento}', '${persona.domicilio.id}', '${persona.domicilio.calle}', '${persona.domicilio.localidad}', '${persona.domicilio.provincia}','${persona.telefono.id}', '${persona.telefono.telf}')">Modificar</button>
+                <button class="btn btn-danger btn-sm" onclick="deletePersona(${persona.cedula})">Eliminar</button>
               </td>
             `;
 
@@ -45,10 +46,11 @@ function fetchPersonas() {
 
 // Función para abrir el modal y cargar los datos de la persona
 editPersona = function (
-  dni,
+  cedula,
   apellido,
   nombre,
-  fechaIngreso,
+  sexo,
+  fechaNacimiento,
   idDomicilio,
   calle,
   localidad,
@@ -56,15 +58,15 @@ editPersona = function (
   idTelefono,
   telf,
 ) {
-  currentDni = dni;
+  currentCedula = String(cedula);
   currentDomicilioId = idDomicilio;
   currentTelefonoId = idTelefono
   document.getElementById("editApellido").value = apellido;
   document.getElementById("editNombre").value = nombre;
-  document.getElementById("editDni").value = dni;
-  document.getElementById("editFecha").value = fechaIngreso;
+  document.getElementById("editCedula").value = String(cedula);
+  document.getElementById("editSexo").value = sexo;
+  document.getElementById("editFecha").value = fechaNacimiento;
   document.getElementById("editCalle").value = calle;
-  //document.getElementById("editNumero").value = numero;
   document.getElementById("editLocalidad").value = localidad;
   document.getElementById("editProvincia").value = provincia;
   document.getElementById("editTelefono").value = telf;
@@ -76,9 +78,9 @@ editForm.addEventListener("submit", function (event) {
   event.preventDefault();
   const apellido = document.getElementById("editApellido").value;
   const nombre = document.getElementById("editNombre").value;
+  const sexo = document.getElementById("editSexo").value;
   const fecha = document.getElementById("editFecha").value;
   const calle = document.getElementById("editCalle").value;
-  //const numero = document.getElementById("editNumero").value;
   const localidad = document.getElementById("editLocalidad").value;
   const provincia = document.getElementById("editProvincia").value;
   const telf = document.getElementById("editTelefono").value;
@@ -90,10 +92,11 @@ editForm.addEventListener("submit", function (event) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      dni: currentDni,
+      cedula: String(currentCedula),
       nombre,
       apellido,
-      fechaIngreso: fecha,
+      sexo,
+      fechaNacimiento: fecha,
       domicilio: {
         id: currentDomicilioId,
         calle,
@@ -119,10 +122,10 @@ editForm.addEventListener("submit", function (event) {
 });
 
 // Función para eliminar una persona
-deletePersona = function (dni) {
+deletePersona = function (cedula) {
   if (confirm("¿Esta seguro de que desea eliminar esta persona?")) {
     // eliminar la persona
-    fetch(`persona/eliminar/${dni}`, {
+    fetch(`persona/eliminar/${String(cedula)}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
